@@ -21,7 +21,7 @@ namespace Lesson2
 			int value;
 			Console.WriteLine(text);
 			while (!int.TryParse(Console.ReadLine(), out value))
-				Console.WriteLine($"Повторми... {text}");
+				Console.WriteLine($"Повторим... {text}");
 
 			return value;
 		}
@@ -30,7 +30,7 @@ namespace Lesson2
 			float value;
 			Console.WriteLine(text);
 			while (!float.TryParse(Console.ReadLine(), out value))
-				Console.WriteLine($"Повторми... {text}");
+				Console.WriteLine($"Повторим... {text}");
 
 			return value;
 		}
@@ -40,7 +40,7 @@ namespace Lesson2
 			int value;
 			Console.WriteLine(text);
 			while (!(int.TryParse(Console.ReadLine(), out value) && value > 0 && value <= 12))
-				Console.WriteLine($"Повторми... {text}");
+				Console.WriteLine($"Повторим... {text}");
 
 			return value;
 		}
