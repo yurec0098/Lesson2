@@ -7,6 +7,15 @@ namespace Lesson2
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Добро пожаловать!");
+			Console.WriteLine("Проверка числа на чётность:");
+
+			do
+			{
+				int num = ReadInt($"Веедите число в диапозоне от {int.MinValue} до {int.MaxValue}:");
+				Console.WriteLine($"Данное число было {(num % 2 == 0 ? "" : "не")}чётным.");
+
+				Console.WriteLine("Попробуем ещё? Тогда введите +");
+			} while (Console.ReadLine() == "+");
 		}
 
 		static int ReadInt(string text)
