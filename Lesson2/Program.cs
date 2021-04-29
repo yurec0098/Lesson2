@@ -24,11 +24,32 @@ namespace Lesson2
 				case 1:
 				case 2:
 				case 12:
-					Console.WriteLine($"Сейчас месяц {formatInfo.GetMonthName(month)} и дождливая зима");
+					if(average_temperature > 0)
+						Console.WriteLine($"Дождливая зима. Месяц {formatInfo.GetMonthName(month)} и ");
+					else
+						Console.WriteLine($"Зима. Месяц {formatInfo.GetMonthName(month)} и ");
+					break;
+
+				case 3:
+				case 4:
+				case 5:
+					Console.WriteLine($"Весна. Месяц {formatInfo.GetMonthName(month)} и ");
+					break;
+
+				case 6:
+				case 7:
+				case 8:
+					Console.WriteLine($"Лето. Месяц {formatInfo.GetMonthName(month)} и ");
+					break;
+
+				case 9:
+				case 10:
+				case 11:
+					Console.WriteLine($"Осень. Месяц {formatInfo.GetMonthName(month)} и ");
 					break;
 
 				default:
-					Console.WriteLine($"Сейчас месяц {formatInfo.GetMonthName(month)}");
+					Console.WriteLine($"Месяц {formatInfo.GetMonthName(month)}");
 					break;
 			}
 		}
