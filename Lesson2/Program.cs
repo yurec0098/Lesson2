@@ -25,27 +25,27 @@ namespace Lesson2
 				case 2:
 				case 12:
 					if(average_temperature > 0)
-						Console.WriteLine($"Дождливая зима. Месяц {formatInfo.GetMonthName(month)} и ");
+						Console.WriteLine($"Дождливая зима. Месяц {formatInfo.GetMonthName(month)}");
 					else
-						Console.WriteLine($"Зима. Месяц {formatInfo.GetMonthName(month)} и ");
+						Console.WriteLine($"Зима. Месяц {formatInfo.GetMonthName(month)}");
 					break;
 
 				case 3:
 				case 4:
 				case 5:
-					Console.WriteLine($"Весна. Месяц {formatInfo.GetMonthName(month)} и ");
+					Console.WriteLine($"Весна. Месяц {formatInfo.GetMonthName(month)}");
 					break;
 
 				case 6:
 				case 7:
 				case 8:
-					Console.WriteLine($"Лето. Месяц {formatInfo.GetMonthName(month)} и ");
+					Console.WriteLine($"Лето. Месяц {formatInfo.GetMonthName(month)}");
 					break;
 
 				case 9:
 				case 10:
 				case 11:
-					Console.WriteLine($"Осень. Месяц {formatInfo.GetMonthName(month)} и ");
+					Console.WriteLine($"Осень. Месяц {formatInfo.GetMonthName(month)}");
 					break;
 
 				default:
