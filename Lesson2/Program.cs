@@ -1,52 +1,107 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Lesson2
 {
 	class Program
 	{
-        struct Goods
+		class ReceiptData
 		{
-            public string Name;
-            public int Code;
-            public float Count;
-            public float Price;
+			public string ShopName = "СУПЕРМАРКЕТ 'Семья'";
+			public string Address = "пл. Кооперативная д.2";
+			public long PN = 405375312140;
 
-			public Goods(string name, int code, float count, float price)
+			public string Cashier;
+			public int ChekID;
+			public int Cashbox;
+
+			public List<Goods> GoodsList = new List<Goods>();
+
+			public struct Goods
 			{
-                Name = name;
-                Code = code;
-                Count = count;
-                Price = price;
+				public string Name;
+				public int Code;
+				public float Count;
+				public float Price;
+
+				public Goods(string name, int code, float count, float price)
+				{
+					Name = name;
+					Code = code;
+					Count = count;
+					Price = price;
+				}
+
+				public void WriteConsole()
+				{
+					Console.WriteLine($"  {Count} x {Price:0.00}");
+					Console.Write($"{Code} {Name}");
+					WriteLineRight($"{Count * Price:0.00}");
+				}
 			}
 
-            public void WriteConsole()
+			public ReceiptData(string cashier, int chekID, int cashbox)
 			{
-                Console.WriteLine($"  {Count} x {Price:0.00}");
-                Console.Write($"{Code} {Name}");
+				Cashier = cashier;
+				ChekID = chekID;
+				Cashbox = cashbox;
 
-                if (Console.CursorLeft > 28)
-                    Console.CursorTop++;
+				InitGoods();
+			}
 
-                Console.SetCursorPosition(30, Console.CursorTop);
-                Console.WriteLine($"{Count * Price:0.00}");
+			public void InitGoods()
+			{
+				var random = new Random((int)DateTime.Now.Ticks);
+				GoodsList.Add(new Goods("Ручка синяя", random.Next(1000, 9999), random.Next(2, 7), 2.5f));
+				GoodsList.Add(new Goods("Простой карандаш", random.Next(1000, 9999), random.Next(2, 10), 1f));
+				GoodsList.Add(new Goods("Стирательная резинка", random.Next(1000, 9999), random.Next(1, 3), 0.5f));
+				GoodsList.Add(new Goods("Линейка", random.Next(1000, 9999), 1, 2f));
+			}
+			public void WriteConsole()
+			{
+				WriteLineCentr(ShopName);
+				WriteLineCentr(Address);
+				WriteLineCentr($"ПН {PN}");
+
+				Console.WriteLine($"#Касир: {Cashier}");
+				Console.WriteLine($"#Чек: #{ChekID}");
+				Console.WriteLine($"#Касса: #{ChekID}");
+
+				foreach (var good in GoodsList)
+					good.WriteConsole();
+
+				Console.WriteLine(new string('-', 40));
+				Console.Write("СУММА:");
+				WriteLineRight($"{GoodsList.Sum(x=>x.Price * x.Count):0.00}");
+				Console.WriteLine(new string('-', 40));
+
+				WriteLineCentr($"{DateTime.Now:u}".TrimEnd('Z'));
+				WriteLineCentr($"ФИСКАЛЬНЫЙ ЧЕК");
 			}
 		}
 
 		static void Main(string[] args)
 		{
-            var random = new Random((int)DateTime.Now.Ticks);
-			Console.WriteLine("Добро пожаловать!");
-
-
-            var prod = new Goods("Печенье 'Днипро'", random.Next(1000, 9999), 10.6f, 11);
-            prod.WriteConsole();
-            prod.WriteConsole();
-            prod.WriteConsole();
-
-
-            Console.ReadLine();
+			new ReceiptData("Денисова Г.", 139, 284).WriteConsole();
+			Console.ReadLine();
         }
+		static void WriteLineCentr(string text, int max = 40)
+		{
+			int startPos = (max - text.Length) / 2;
+			Console.SetCursorPosition(startPos, Console.CursorTop);
+			Console.WriteLine($"{text}");
+		}
+		static void WriteLineRight(string text, int max = 40)
+		{
+			int startPos = max - text.Length;
+			if (startPos - Console.CursorLeft < 4)
+				Console.CursorTop++;
+
+			Console.SetCursorPosition(startPos, Console.CursorTop);
+			Console.WriteLine($"{text}");
+		}
 
 		static int ReadInt(string text)
 		{
