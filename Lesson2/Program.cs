@@ -42,9 +42,9 @@ namespace Lesson2
 
 		private static void CheckWorkDays(DaysOfWeek days, string office)
 		{
-			if ((days & workDays) == workDays)
+			if (days.HasFlag(workDays))
 				Console.WriteLine($"{office} работает по всем будням");
-			if ((days & weekend) == weekend)
+			if (days.HasFlag(weekend))
 				Console.WriteLine($"{office} работает в выходные");
 		}
 
